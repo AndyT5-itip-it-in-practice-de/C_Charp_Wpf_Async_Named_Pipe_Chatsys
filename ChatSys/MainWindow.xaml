@@ -5,21 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="283.5" Width="1078.338" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="ThreeDBorderWindow">
-    <Grid Margin="0,0,4,0">
-        <Button Content="Wpf_PipeConnectWindow" Click="Wpf_PipeConnectWindow_Click" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="151"/>
-        <Button Content="Write Log..." Click="Write_Log_Click" HorizontalAlignment="Left" Height="22" Margin="10,70,0,0" VerticalAlignment="Top" Width="137"/>
-        <Label Content="public static async Task LogWrite(string LoggCategorie,string Message,bool ActionServer,String ServerNo,bool ActionClient,bool AnswerClient)&#xD;&#xA;     " HorizontalAlignment="Left" Height="32" Margin="161,68,0,0" VerticalAlignment="Top" Width="816"/>
-        <Button Content="Write Adjustment to ini..." Click="Write_Adjustments_to_ini_Click" HorizontalAlignment="Left" Height="22" Margin="10,102,0,0" VerticalAlignment="Top" Width="137"/>
-        <Label Content=" public static async Task AdjustWrite_toIni(String FileName, string Group, string Caller, string Value, bool ActionServer, String ServerNo, bool ActionClient, bool AnswerClient)&#xD;&#xA;      " HorizontalAlignment="Left" Height="32" Margin="161,100,-53,0" VerticalAlignment="Top" Width="919"/>
-        <Button Content="Run Program" Click="Run_Program_Click" HorizontalAlignment="Left" Height="22" Margin="10,134,0,0" VerticalAlignment="Top" Width="137"/>
-        <Label Content="public static async Task ActionStarter(string RealButtonName, string Name, string Action, bool ActionServer, string ServerNo, bool ActionClient, bool AnswerClient)&#xD;&#xA;    " HorizontalAlignment="Left" Height="32" Margin="161,132,-274,0" VerticalAlignment="Top" Width="869"/>
-        <Label Content="LogWrite(string LoggCategorie,string Message,bool ActionServer,String ServerNo,bool ActionClient,bool AnswerClient)" HorizontalAlignment="Left" Height="34" Margin="10,211,0,0" VerticalAlignment="Top" Width="639"/>
-        <Label Content="Klasse *HelperPipes*=" HorizontalAlignment="Left" Height="29" Margin="10,191,0,0" VerticalAlignment="Top" Width="137" FontWeight="Bold"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="10,191,0,0" VerticalAlignment="Top" Width="656" Panel.ZIndex="-2" Background="#19000000"/>
-        <Label Content="Aufruf - Klassen Beispiel:" HorizontalAlignment="Left" Height="37" Margin="10,169,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label Content="(Autorun-in Background)" HorizontalAlignment="Left" Height="32" Margin="166,10,0,0" VerticalAlignment="Top" Width="364"/>
-        <Button Content="Close" Click="Close" HorizontalAlignment="Left" Width="96" Background="#FFF01717" Margin="951,197,0,21" FontWeight="Bold" FontSize="16" Height="40"/>
-        <Button Content="Restart" Click="Restart" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="99" Background="#FF8AF51E" Margin="847,197,0,0" FontWeight="Bold" FontSize="16"/>
+        Title="ChatSys-NamedPipe-MessageSystem" Height="329.045" Width="403.88" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowStyle="ThreeDBorderWindow" Icon="Images/pipe-icon.ico">
+    <Grid Margin="0,0,-6,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="155*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas HorizontalAlignment="Left" Height="280" Margin="8,10,0,0" VerticalAlignment="Top" Width="381" Background="#FFF3ECEC" Grid.ColumnSpan="2">
+            <Button Content="Wpf_PipeConnectWindow" Click="Wpf_PipeConnectWindow_Click" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="151" Canvas.Left="10" Canvas.Top="10"/>
+            <Button Content="Write Log..." Click="Write_Log_Click" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="137" Canvas.Left="10" Canvas.Top="70"/>
+            <Button Content="Write Adjustment to ini..." Click="Write_Adjustments_to_ini_Click" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="137" Canvas.Left="10" Canvas.Top="102"/>
+            <Button Content="Run Program" Click="Run_Program_Click" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="137" Canvas.Left="10" Canvas.Top="134"/>
+            <Label Content="(Autorun-in Background)" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="162" Canvas.Left="44" Canvas.Top="38"/>
+            <Button Content="Close" Click="Close" HorizontalAlignment="Left" Width="96" Background="#FFF01717" FontWeight="Bold" FontSize="16" Height="40" VerticalAlignment="Bottom" Canvas.Left="200" Canvas.Top="230"/>
+            <Button Content="Restart" Click="Restart" HorizontalAlignment="Left" Height="40" VerticalAlignment="Bottom" Width="99" Background="#FF8AF51E" FontWeight="Bold" FontSize="16" Canvas.Left="72" Canvas.Top="230"/>
+            <TextBox x:Name="txtbx_Writelog_Text" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="Lalelu" VerticalAlignment="Top" Width="181" Canvas.Left="183" Canvas.Top="70"/>
+            <TextBox x:Name="txtbx_RunProgram_Text" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="Explorer" VerticalAlignment="Top" Width="181" Canvas.Left="183" Canvas.Top="134"/>
+            <Image Height="65" Canvas.Left="307" Width="78" Source="Images/pipe.png" Canvas.Top="-1"/>
+            <Label Content="Action:" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="49" Canvas.Left="78" Canvas.Top="181" RenderTransformOrigin="0.521,0.154">
+                <Label.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.379"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Label.RenderTransform>
+            </Label>
+            <TextBox x:Name="txtbx_Client_Action_Startet_YesNo" Height="14" Canvas.Left="127" TextWrapping="Wrap" Canvas.Top="188" Width="244" FontSize="9"/>
+        </Canvas>
     </Grid>
 </Window>

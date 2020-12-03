@@ -149,7 +149,8 @@ namespace ChatSys
                                      //---------------------------Greife Auf anderes Window zu-------------------------------------------------------------------------
                                      var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Wpf_PipeConnectWindow) as Wpf_PipeConnectWindow;
 
-                                     targetWindow.txtbx_Empfangen_Text.Text = (message);
+                                     string message1 = message;
+                                     targetWindow.txtbx_Empfangen_Text.Text = message1;
                                  }
                                  catch (Exception ex)
                                  {
@@ -158,6 +159,17 @@ namespace ChatSys
                                      //await SmallLogAllTogether.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
 
                                  }
+                                 catch 
+                                 {
+                                     MessageBox.Show("MessageServer1:  StartListeningAsync = Error");
+                                     //await SmallLogError.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
+                                     //await SmallLogAllTogether.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
+
+                                 }
+
+
+
+
                                  //NEW AUFRUF ANDERES fENSTER-----------------------------------------------------------
 
                                  /*

@@ -60,7 +60,9 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
 
             MessageServer_SendMessageException(Sender, new RoutedEventArgs());
 
-
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(Sender, new RoutedEventArgs());
+            Del_Exit_Textboxes_Click(Sender, new RoutedEventArgs());
         }
 
         private void Combobox_Fill(string sender, RoutedEventArgs routedEventArgs)
@@ -144,9 +146,6 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
         {
             try
             {
-                //lade ini files-------------------------------------------------
-                string appDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-                string Pipe_Managment_ini_folder_file = (appDirectory + "Data/Pipe_Managment.ini");
 
 
                 /*
@@ -159,6 +158,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                 Name4 = Pipe_DM_AutoBackuper
                 Name5 = Pipe_DM_AutoUpdater
                 Name6 = Pipe_Ini_Read_Writer
+                Name7 = Pipe_Ini_Read_Writer
+                Name8 = Pipe_Ini_Read_Writer
 
                 [Client_Names]
                 Name1 = Pipe_DesktopManager_Maine
@@ -179,6 +180,10 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                 Time_ms=250
                 */
 
+                //lade ini files-------------------------------------------------
+                string appDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+                string Pipe_Managment_ini_folder_file = (appDirectory + "Data/Pipe_Managment.ini");
+
                 INIFile inifile1 = new INIFile(Pipe_Managment_ini_folder_file, true);
                 string value1 = inifile1.GetValue("Server_Names", "Name1");
                 string value2 = inifile1.GetValue("Server_Names", "Name2");
@@ -186,6 +191,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                 string value4 = inifile1.GetValue("Server_Names", "Name4");
                 string value5 = inifile1.GetValue("Server_Names", "Name5");
                 string value6 = inifile1.GetValue("Server_Names", "Name6");
+                string value7 = inifile1.GetValue("Server_Names", "Name7");
+                string value8 = inifile1.GetValue("Server_Names", "Name8");
 
                 txtbx_Server1_SendPipeName1.Text = value1;
                 txtbx_Server2_SendPipeName2.Text = value2;
@@ -193,6 +200,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                 txtbx_Server4_SendPipeName4.Text = value4;
                 txtbx_Server5_SendPipeName5.Text = value5;
                 txtbx_Server6_SendPipeName6.Text = value6;
+                txtbx_Server7_SendPipeName7.Text = value7;
+                txtbx_Server8_SendPipeName8.Text = value8;
 
                 string value10 = inifile1.GetValue("Server_LOCAL_SERVER", "Adress");
                 txtListenPipeName.Text = value10;
@@ -263,6 +272,11 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
 
             TaskEx.Run(() => MessageServer1.SendMessageAsync(pipeName1, message1, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
             //----------------------------------------------------------------------------------------------
+
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
+
+
         }
 
         private void butSenden_Server2_Click(object sender, RoutedEventArgs e)
@@ -291,6 +305,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             TaskEx.Run(() => MessageServer2.SendMessageAsync(pipeName2, message2, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
             //----------------------------------------------------------------------------------------------
 
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
         }
 
         private void butSenden_Server3_Click(object sender, RoutedEventArgs e)
@@ -319,6 +335,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             TaskEx.Run(() => MessageServer3.SendMessageAsync(pipeName3, message3, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
             //----------------------------------------------------------------------------------------------
 
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
         }
 
         private void butSenden_Server4_Click(object sender, RoutedEventArgs e)
@@ -347,6 +365,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             TaskEx.Run(() => MessageServer4.SendMessageAsync(pipeName4, message4, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
             //----------------------------------------------------------------------------------------------
 
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
         }
 
         private void butSenden_Server5_Click(object sender, RoutedEventArgs e)
@@ -375,6 +395,8 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             TaskEx.Run(() => MessageServer5.SendMessageAsync(pipeName5, message5, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
             //----------------------------------------------------------------------------------------------
 
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
         }
 
         private void butSenden_Server6_Click(object sender, RoutedEventArgs e)
@@ -403,7 +425,80 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             TaskEx.Run(() => MessageServer6.SendMessageAsync(pipeName6, message6, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
             //----------------------------------------------------------------------------------------------
 
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
         }
+
+
+        private void butSenden_Server7_Click(object sender, RoutedEventArgs e)
+        {
+            var pipeName7 = txtbx_Server7_SendPipeName7.Text;
+            string message7 = txtbx_Server7_Send_Text7.Text;
+
+            //----------------------------------------------------------------------------------------------
+            string LOCAL_SERVER = txtbx_Server_LOCAL_SERVER.Text;
+
+            string Server_Send_Sleep_Time = txtbx_Server_Send_Sleep_Time.Text;
+            int int_Server_Send_Sleep_Time = Convert.ToInt32(Server_Send_Sleep_Time);
+
+            string Server_DEFAULT_TIME_OUT = txtbx_Server_DEFAULT_TIME_OUT.Text;
+            int int_Server_DEFAULT_TIME_OUT = Convert.ToInt32(Server_DEFAULT_TIME_OUT);
+            //----------------------------------------------------------------------------------------------
+
+            DateTime today = DateTime.Now;
+            string datetime = today.ToString("yyyy-MM-dd_HH:mm:ss");
+
+            Listbox_Outbox.Items.Add(datetime + " - Server7 - " + pipeName7 + " - PipeServer Send Message :   " + message7);
+            Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
+
+            //var message = String.Format("Sending to pipe:={0}\nListening on pipe:={1}",txtSendPipeName.Text,txtListenPipeName.Text);
+
+            TaskEx.Run(() => MessageServer7.SendMessageAsync(pipeName7, message7, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
+            //----------------------------------------------------------------------------------------------
+
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
+        }
+
+
+        private void butSenden_Server8_Click(object sender, RoutedEventArgs e)
+        {
+            var pipeName8 = txtbx_Server8_SendPipeName8.Text;
+            string message8 = txtbx_Server8_Send_Text8.Text;
+
+            //----------------------------------------------------------------------------------------------
+            string LOCAL_SERVER = txtbx_Server_LOCAL_SERVER.Text;
+
+            string Server_Send_Sleep_Time = txtbx_Server_Send_Sleep_Time.Text;
+            int int_Server_Send_Sleep_Time = Convert.ToInt32(Server_Send_Sleep_Time);
+
+            string Server_DEFAULT_TIME_OUT = txtbx_Server_DEFAULT_TIME_OUT.Text;
+            int int_Server_DEFAULT_TIME_OUT = Convert.ToInt32(Server_DEFAULT_TIME_OUT);
+            //----------------------------------------------------------------------------------------------
+
+            DateTime today = DateTime.Now;
+            string datetime = today.ToString("yyyy-MM-dd_HH:mm:ss");
+
+            Listbox_Outbox.Items.Add(datetime + " - Server8 - " + pipeName8 + " - PipeServer Send Message :   " + message8);
+            Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
+
+            //var message = String.Format("Sending to pipe:={0}\nListening on pipe:={1}",txtSendPipeName.Text,txtListenPipeName.Text);
+
+            TaskEx.Run(() => MessageServer8.SendMessageAsync(pipeName8, message8, LOCAL_SERVER, int_Server_Send_Sleep_Time, int_Server_DEFAULT_TIME_OUT));
+            //----------------------------------------------------------------------------------------------
+
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
+        }
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// Listen Test.
         /// </summary>
@@ -444,7 +539,7 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                     Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
 
 
-                    Check_String(sender, messageReceievd, new RoutedEventArgs());
+                    // Check_String(sender, messageReceievd, new RoutedEventArgs());
 
 
 
@@ -622,14 +717,14 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
         }
 
-       
+
 
         private void Listbox_Scroll_to_End_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-               // Listbox_Outbox.SelectedIndex = Listbox_Outbox.Items.Count - 1;
-              //  Listbox_Outbox.ScrollIntoView(Listbox_Outbox.SelectedItem);
+                // Listbox_Outbox.SelectedIndex = Listbox_Outbox.Items.Count - 1;
+                //  Listbox_Outbox.ScrollIntoView(Listbox_Outbox.SelectedItem);
 
                 //-----------------------------------------------------------------------------------------
 
@@ -644,7 +739,7 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show("Listbox_Scroll_to_End_Click - Error =\r\n" + ex.Message);
+                //System.Windows.MessageBox.Show("Listbox_Scroll_to_End_Click - Error =\r\n" + ex.Message);
             }
         }
 
@@ -663,6 +758,83 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             txtbx_Server6_SendPipeName6.Text = txtListenPipeName.Text;
             txtbx_Server7_SendPipeName7.Text = txtListenPipeName.Text;
             txtbx_Server8_SendPipeName8.Text = txtListenPipeName.Text;
+        }
+
+        private void Server_PipeNames_Load_Click(object sender, RoutedEventArgs e)
+        {
+            //lade ini files-------------------------------------------------
+            string appDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string Pipe_Managment_ini_folder_file = (appDirectory + "Data/Pipe_Managment.ini");
+
+            INIFile inifile1 = new INIFile(Pipe_Managment_ini_folder_file, true);
+            string value1 = inifile1.GetValue("Server_Names", "Name1");
+            string value2 = inifile1.GetValue("Server_Names", "Name2");
+            string value3 = inifile1.GetValue("Server_Names", "Name3");
+            string value4 = inifile1.GetValue("Server_Names", "Name4");
+            string value5 = inifile1.GetValue("Server_Names", "Name5");
+            string value6 = inifile1.GetValue("Server_Names", "Name6");
+            string value7 = inifile1.GetValue("Server_Names", "Name7");
+            string value8 = inifile1.GetValue("Server_Names", "Name8");
+
+            txtbx_Server1_SendPipeName1.Text = value1;
+            txtbx_Server2_SendPipeName2.Text = value2;
+            txtbx_Server3_SendPipeName3.Text = value3;
+            txtbx_Server4_SendPipeName4.Text = value4;
+            txtbx_Server5_SendPipeName5.Text = value5;
+            txtbx_Server6_SendPipeName6.Text = value6;
+            txtbx_Server7_SendPipeName7.Text = value7;
+            txtbx_Server8_SendPipeName8.Text = value8;
+        }
+
+        private async void Server_PipeNames_Save_Click(object sender, RoutedEventArgs e)
+        {
+            string value1 = txtbx_Server1_SendPipeName1.Text;
+            string value2 = txtbx_Server2_SendPipeName2.Text;
+            string value3 = txtbx_Server3_SendPipeName3.Text;
+            string value4 = txtbx_Server4_SendPipeName4.Text;
+            string value5 = txtbx_Server5_SendPipeName5.Text;
+            string value6 = txtbx_Server6_SendPipeName6.Text;
+            string value7 = txtbx_Server7_SendPipeName7.Text;
+            string value8 = txtbx_Server8_SendPipeName8.Text;
+
+
+            // speichere in ini 
+            string appDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string Pipe_Managment_ini_folder_file = (appDirectory + "Data/Pipe_Managment.ini");
+
+            INIFile inifile33 = new INIFile(Pipe_Managment_ini_folder_file, true);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name1", value1);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name2", value2);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name3", value3);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name4", value4);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name5", value5);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name6", value6);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name7", value7);
+            await inifile33.SetValueAsyncAsync("Server_Names", "Name8", value8);
+        }
+
+        private void Client_PipeName_Load_Click(object sender, RoutedEventArgs e)
+        {
+            //lade ini files-------------------------------------------------
+            string appDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string Pipe_Managment_ini_folder_file = (appDirectory + "Data/Pipe_Managment.ini");
+
+            INIFile inifile1 = new INIFile(Pipe_Managment_ini_folder_file, true);
+            string value14 = inifile1.GetValue("Client_Names", "Name1");
+            txtListenPipeName.Text = value14;
+        }
+
+        private async void Client_PipeName_Save_Click(object sender, RoutedEventArgs e)
+        {
+            string value1 = txtListenPipeName.Text;
+            if (string.IsNullOrEmpty(value1)) { MessageBox.Show("txtListenPipeName - IsNullOrEmpty"); txtListenPipeName.Background = Brushes.Red; return; }
+
+            //save ini files-------------------------------------------------
+            string appDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string Pipe_Managment_ini_folder_file = (appDirectory + "Data/Pipe_Managment.ini");
+
+            INIFile inifile33 = new INIFile(Pipe_Managment_ini_folder_file, true);
+            await inifile33.SetValueAsyncAsync("Client_Names", "Name1", value1);
         }
 
         private void Client_Restart_Click(object sender, RoutedEventArgs e)
@@ -734,10 +906,10 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
         {
             //serializes ---------------------------------------------
             try
-                {
-            Message_Translator MessTransl = new Message_Translator
             {
-                
+                Message_Translator MessTransl = new Message_Translator
+                {
+
                     MessageCategory = txtbx_Message_Category.Text,
                     Server_ActionNeedet = txtbx_Message_Server_ActionNeedet.Text,
                     //bool mit großem true?????? soll klein
@@ -752,34 +924,34 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
 
                     Client_ActionNeedet = txtbx_Message_Client_ActionNeedet.Text,
                     Client_AnswerNeedet = txtbx_Message_Client_AnswerNeedet.Text,
-                    };
+                };
 
-                    string jsonString = JsonConvert.SerializeObject(MessTransl, Formatting.Indented);
+                string jsonString = JsonConvert.SerializeObject(MessTransl, Formatting.Indented);
 
-                    txtbx_Message_Created_jsonString.Text = jsonString;
+                txtbx_Message_Created_jsonString.Text = jsonString;
 
 
-                    Listbox_Outbox.Items.Add(".");
-                    Listbox_Outbox.Items.Add("*** Create JsonString ***");
-                    Listbox_Outbox.Items.Add(jsonString);
-                    Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
-        }
-                catch (Exception ex)
-                {
+                Listbox_Outbox.Items.Add(".");
+                Listbox_Outbox.Items.Add("*** Create JsonString ***");
+                Listbox_Outbox.Items.Add(jsonString);
+                Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show("Create_lsonString_Click = Error =\r\n" + ex.Message);
                 //await SmallLogError.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
                 //await SmallLogAllTogether.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
-    }
-    }
+            }
+        }
 
-    private void Read_lsonString_Click(object sender, RoutedEventArgs e)
+        private void Read_lsonString_Click(object sender, RoutedEventArgs e)
         {
             //Deserializes ---------------------------------------------
 
             string jsonString = txtbx_Message_Created_jsonString_input_fromPipe_Decode.Text;   //txtbx_Message_Created_jsonString.Text;
 
             Message_Translator MessTransl = JsonConvert.DeserializeObject<Message_Translator>(jsonString);
-            { 
+            {
                 txtbx_catch_Message_Category.Text = (MessTransl.MessageCategory);
                 txtbx_catch_Message_Server_ActionNeedet.Text = (MessTransl.Server_ActionNeedet).ToString();
 
@@ -878,6 +1050,9 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
             string ServerActionNeedet = txtbx_Message_Server_ActionNeedet.Text;
             string ServerNo = txtbx_Message_Server_Number.Text;
 
+            if (string.IsNullOrEmpty(ServerActionNeedet)) { MessageBox.Show("txtbx_Message_Server_ActionNeedet - IsNullOrEmpty"); txtbx_Message_Server_ActionNeedet.Background = Brushes.Red; return; }
+            if (string.IsNullOrEmpty(ServerNo)) { MessageBox.Show("txtbx_Message_Server_Number - IsNullOrEmpty"); txtbx_Message_Server_Number.Background = Brushes.Red; return; }
+
             if (ServerActionNeedet == "true")
             {
                 txtbx_Message_Server_IP.Text = txtbx_Local_IP.Text;
@@ -887,53 +1062,21 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                 {
                     txtbx_Message_Server_PipeName.Text = txtbx_Server1_SendPipeName1.Text;
 
-                    //----------------------------------------------------------
-                    //loop check 3times...
-                    int i;
-                    int j = 5;
-                    for (i = 0, Console.WriteLine($"Start: i={i}, j={j}"); i < j; i++, j--, Console.WriteLine($"Step: i={i}, j={j}"))
-                    {
-                       string x1 = txtbx_Message_Value1.Text;
-                        string x2 = txtbx_Message_Value2.Text;
-                          string x3 = txtbx_Message_Value3.Text;
+                    txtbx_Server1_Send_Text1.Text = "";
+                    txtbx_Server1_Send_Text1.Text = txtbx_Message_Created_jsonString.Text;
+                    string value = txtbx_Server1_Send_Text1.Text;
+                    if (string.IsNullOrEmpty(value)) { MessageBox.Show("txtbx_Server1_Send_Text1 - IsNullOrEmpty"); txtbx_Server1_Send_Text1.Background = Brushes.Red; MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s1 - value \r\n" + "Sendbox empty"); return; }
 
-                        // wenn es nicht leer ist...
-                        if (!string.IsNullOrEmpty(x1)) 
-                        {
-                            MessageBox.Show("da1");
-                            // wenn es nicht leer ist...
-                            if (!string.IsNullOrEmpty(x2))
-                            {
-                                MessageBox.Show("da2");
-                                // wenn es nicht leer ist...
-                                if (!string.IsNullOrEmpty(x3))
-                                {
-                                    MessageBox.Show("da3");
-                                    //Serialisize
-                                    Create_lsonString_Click(sender, new RoutedEventArgs());
-                                    goto NextStep;
-                                }
-
-                            }
-                        }
-
-                        Listbox_Outbox.Items.Add("*** txtbx_Message_Server_Number_TextChanged check all there : ***  " + i + " from " + j + "  **");
-                        Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
+                    txtbx_Server1_Send_Text1.Background = Brushes.Yellow;
 
 
-                    }
+                    //Send ---------------------------------------------------------------
+                    butSenden_Server1_Click(sender, new RoutedEventArgs());
+                    //-----------------------------------------------------------------------
 
-                    //----------------------------------------------------------
-                    NextStep:
-                   
 
-                   txtbx_Server1_Send_Text1.Text = "";
-                   txtbx_Server1_Send_Text1.Text = txtbx_Message_Created_jsonString.Text;
-                   string value = txtbx_Server1_Send_Text1.Text;
-                   if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s1 - value \r\n" + "Sendbox empty"); return; }
-
-                    //Send
-                   butSenden_Server1_Click(sender, new RoutedEventArgs());
+                    //textbox leeren
+                    txtbx_Server1_Send_Text1.Text = "";
                 }
                 //----------------------------------------------------------------------------------------------------
                 if (ServerNo == "S2")//(Logging)
@@ -944,18 +1087,45 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                     Create_lsonString_Click(sender, new RoutedEventArgs());
 
                     txtbx_Server2_Send_Text2.Text = "";
-                   txtbx_Server2_Send_Text2.Text = txtbx_Message_Created_jsonString.Text;
-                   string value = txtbx_Server2_Send_Text2.Text;
-                   if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s2 - value \r\n" + "Sendbox empty"); return; }
+                    txtbx_Server2_Send_Text2.Text = txtbx_Message_Created_jsonString.Text;
+                    string value = txtbx_Server2_Send_Text2.Text;
+                    if (string.IsNullOrEmpty(value)) { MessageBox.Show("txtbx_Server2_Send_Text2 - IsNullOrEmpty"); txtbx_Server2_Send_Text2.Background = Brushes.Red; MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s2 - value \r\n" + "Sendbox empty"); return; }
 
-                    //Send
-                   butSenden_Server2_Click(sender, new RoutedEventArgs());
 
+                    txtbx_Server2_Send_Text2.Background = Brushes.Yellow;
+
+                    //Send ---------------------------------------------------------------
+                    butSenden_Server2_Click(sender, new RoutedEventArgs());
+                    //-----------------------------------------------------------------------
+
+
+                    //textbox leeren 
+                    txtbx_Server2_Send_Text2.Text = "";
                 }
                 //----------------------------------------------------------------------------------------------------
                 if (ServerNo == "S3")//(DM_PrAutorestarter)
                 {
                     txtbx_Message_Server_PipeName.Text = txtbx_Server3_SendPipeName3.Text;
+
+                    //Serialisize
+                    Create_lsonString_Click(sender, new RoutedEventArgs());
+
+                    txtbx_Server3_Send_Text3.Text = "";
+                    txtbx_Server3_Send_Text3.Text = txtbx_Message_Created_jsonString.Text;
+
+                    string value = txtbx_Server3_Send_Text3.Text;
+                    if (string.IsNullOrEmpty(value)) { MessageBox.Show("txtbx_Server3_Send_Text3 - IsNullOrEmpty"); txtbx_Server3_Send_Text3.Background = Brushes.Red; MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s3 - value \r\n" + "Sendbox empty"); return; }
+
+
+                    txtbx_Server3_Send_Text3.Background = Brushes.Yellow;
+
+                    //Send ---------------------------------------------------------------
+                    butSenden_Server3_Click(sender, new RoutedEventArgs());
+                    //-----------------------------------------------------------------------
+
+
+                    //textbox leeren 
+                    txtbx_Server3_Send_Text3.Text = "";
                 }
                 //----------------------------------------------------------------------------------------------------
                 if (ServerNo == "S4")//(DM_PrAutobackuper)
@@ -968,24 +1138,18 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
                     txtbx_Message_Server_PipeName.Text = txtbx_Server5_SendPipeName5.Text;
                 }
                 //----------------------------------------------------------------------------------------------------
-                if (ServerNo == "S6")//(Ini_Read_Writer)
+                if (ServerNo == "S6")//(DM_AutoBackuper)
                 {
                     txtbx_Message_Server_PipeName.Text = txtbx_Server6_SendPipeName6.Text;
 
-                    //Serialisize
-                    Create_lsonString_Click(sender, new RoutedEventArgs());
-
-                    txtbx_Server6_Send_Text6.Text = "";
-                    txtbx_Server6_Send_Text6.Text = txtbx_Message_Created_jsonString.Text;
-                    string value = txtbx_Server6_Send_Text6.Text;
-                    if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s6 - value \r\n" + "Sendbox empty"); return; }
-
-                    //Send
-                    butSenden_Server6_Click(sender, new RoutedEventArgs());
-
                 }
                 //----------------------------------------------------------------------------------------------------
-                if (ServerNo == "S7")//(WriteBack-AnswerServer)
+                if (ServerNo == "S7")//(DM_AutoUpdater)
+                {
+                    txtbx_Message_Server_PipeName.Text = txtbx_Server7_SendPipeName7.Text;
+                }
+                //----------------------------------------------------------------------------------------------------
+                if (ServerNo == "S8")//(WriteBack-AnswerServer)
                 {
                     txtbx_Message_Server_PipeName.Text = txtbx_Server7_SendPipeName7.Text;
                 }
@@ -994,14 +1158,20 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
 
         }
 
-        private void butSenden_Server8_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+
 
         private void txtbx_Empfangen_Text_textChanged(object sender, TextChangedEventArgs e)
         {
             string messageReceievd = txtbx_Empfangen_Text.Text;
+
+            // wenn textbox = 0 dann nicht weiter...
+            if (string.IsNullOrEmpty(messageReceievd)) { MessageBox.Show("txtbx_Empfangen_Text - IsNullOrEmpty"); txtbx_Empfangen_Text.Background = Brushes.White; return; }
+
+            //wenn was drin dann yellow
+            txtbx_Empfangen_Text.Background = Brushes.Yellow;
+
+
+
 
             //wenn message enthällt.... - anzeichen das es ein json string ist...
             string SearchItem1 = "MessageCategory";
@@ -1011,9 +1181,161 @@ namespace ChatSys.Pipe_ServerClient_TunnelSys
 
                 //decode
                 Read_lsonString_Click(sender, new RoutedEventArgs());
+
+
+                //lösche Textbox
+                txtbx_Empfangen_Text.Text = "";
             }
 
 
+        }
+
+        private async void txtbx_catch_Message_Client_AnswerNeedet_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string ClientActionNeedet = txtbx_catch_Message_Client_ActionNeedet.Text;
+            string Client_Category = txtbx_catch_Message_Category.Text;
+
+            if (string.IsNullOrEmpty(ClientActionNeedet)) { MessageBox.Show("txtbx_catch_Message_Client_ActionNeedet - IsNullOrEmpty"); txtbx_catch_Message_Client_ActionNeedet.Background = Brushes.Red; return; }
+            if (string.IsNullOrEmpty(Client_Category)) { MessageBox.Show("txtbx_catch_Message_Category - IsNullOrEmpty"); txtbx_catch_Message_Category.Background = Brushes.Red; return; }
+
+            if (ClientActionNeedet == "true")
+            {
+                /* Category
+                      ----------------------------------------------------
+                     LogWrite
+                     AdjustWrite_toIni
+                     AdjustWrite_toProgr
+                     Template_Managment
+                     ActionStarter
+                     DM_AutoRestarter
+                     DM_AutoBackuper
+                     DM_AutoUpdater
+                     DesktopManager
+                     InfoMsg
+                */
+
+                //----------------------------------------------------------------------------------------------------
+                if (Client_Category == "LogWrite")
+                {
+                    string value1 = txtbx_catch_Message_Value1.Text;
+                    string value2 = txtbx_catch_Message_Value2.Text;
+
+                    DateTime today = DateTime.Now;
+                    string datetime = today.ToString("yyyy-MM-dd_HH:mm:ss");
+
+                    if (string.IsNullOrEmpty(value1)) { MessageBox.Show("txtbx_catch_Message_Value1 - IsNullOrEmpty"); txtbx_catch_Message_Value1.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Text = datetime + " - Error"; return; }
+                    if (string.IsNullOrEmpty(value2)) { MessageBox.Show("txtbx_catch_Message_Value2 - IsNullOrEmpty"); txtbx_catch_Message_Value2.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Text = datetime + " - Error"; return; }
+
+
+                    string Message = datetime + " - Action - LogWrite";
+                    txtbx_Client_Action_Startet_YesNo.Text = Message;
+                    txtbx_Client_Action_Startet_YesNo.Background = Brushes.Green;
+                    
+                    //---------------------------Greife Auf anderes Window zu-------------------------------------------------------------------------
+                        var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
+                        targetWindow.txtbx_Client_Action_Startet_YesNo.Text = Message;
+                        targetWindow.txtbx_Client_Action_Startet_YesNo.Background = Brushes.Green;
+                    //------------------------------------------------------------------------------------------------------------------
+
+                    Listbox_Outbox.Items.Add("Client - Action");
+                    Listbox_Outbox.Items.Add("Category - LogWrite");
+                    Listbox_Outbox.Items.Add("LoggCategorie: " + value1 + "  Message: " + value2);
+
+                    if (value1 == "SmallLogAllTogether")
+                    {
+                        await SmallLogAllTogether.Logger(value2);
+                    }
+
+                }
+                //----------------------------------------------------------------------------------------------------
+                if (Client_Category == "ActionStarter")
+                {
+                    string value1 = txtbx_catch_Message_Value1.Text;
+                    string value2 = txtbx_catch_Message_Value2.Text;
+                    string value3 = txtbx_catch_Message_Value3.Text;
+
+                    DateTime today = DateTime.Now;
+                    string datetime = today.ToString("yyyy-MM-dd_HH:mm:ss");
+
+                    if (string.IsNullOrEmpty(value1)) { MessageBox.Show("txtbx_catch_Message_Value1 - IsNullOrEmpty"); txtbx_catch_Message_Value1.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Text = datetime + " - Error"; return; }
+                    if (string.IsNullOrEmpty(value2)) { MessageBox.Show("txtbx_catch_Message_Value2 - IsNullOrEmpty"); txtbx_catch_Message_Value2.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Text = datetime + " - Error"; return; }
+                    if (string.IsNullOrEmpty(value3)) { MessageBox.Show("txtbx_catch_Message_Value3 - IsNullOrEmpty"); txtbx_catch_Message_Value3.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Background = Brushes.Red; txtbx_Client_Action_Startet_YesNo.Text = datetime + " - Error"; return; }
+
+
+                    string Message = datetime + " - Action - ActionStarter";
+                    txtbx_Client_Action_Startet_YesNo.Text = Message;
+                    txtbx_Client_Action_Startet_YesNo.Background = Brushes.Green;
+
+                    //---------------------------Greife Auf anderes Window zu-------------------------------------------------------------------------
+                    var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is MainWindow) as MainWindow;
+                    targetWindow.txtbx_Client_Action_Startet_YesNo.Text = Message;
+                    targetWindow.txtbx_Client_Action_Startet_YesNo.Background = Brushes.Green;
+                    //------------------------------------------------------------------------------------------------------------------
+
+
+                    Listbox_Outbox.Items.Add("Client - Action");
+                    Listbox_Outbox.Items.Add("Category - ActionStarter");
+                    Listbox_Outbox.Items.Add("RealButtonName: " + value1 + "  Name: " + value2 + "  Action: " + value3);
+
+                    try
+                    {
+                        //System.Diagnostics.Process.Start(value3);
+                        // Process.Start(@complete_path_Config_File_System_ini);
+
+                        Process.Start(value3);
+                    }
+                    catch (Exception ex)
+                    {
+                        //await SmallLogAllTogether.Logger("CmboBx_Load_Ini_File_Show_all_txtfiles_SelectionChanged - Error =\r\n" + ex.Message);
+                        //await SmallLogError.Logger("CmboBx_Load_Ini_File_Show_all_txtfiles_SelectionChanged - Error =\r\n" + ex.Message);
+                        System.Windows.MessageBox.Show("txtbx_catch_Message_Client_AnswerNeedet_TextChanged - Error =\r\n" + ex.Message);
+                    }
+
+                }
+                //----------------------------------------------------------------------------------------------------
+
+            }
+
+            //Leere Entry Textboxen...
+            Del_Entry_Textboxes_Click(sender, new RoutedEventArgs());
+            Del_Exit_Textboxes_Click(sender, new RoutedEventArgs());
+
+        }
+        
+        private void Del_Entry_Textboxes_Click(object sender, RoutedEventArgs e)
+        {
+
+            txtbx_Message_Category.Text = "";
+            txtbx_Message_Server_ActionNeedet.Text = "";
+            txtbx_Message_Server_IP.Text = "";
+            txtbx_Message_Server_PipeName.Text = "";
+            txtbx_Message_Server_Number.Text = "";
+            txtbx_Message_Value1.Text = "";
+            txtbx_Message_Value2.Text = "";
+            txtbx_Message_Value3.Text = "";
+            txtbx_Message_Value4.Text = "";
+            txtbx_Message_Value5.Text = "";
+            txtbx_Message_Client_ActionNeedet.Text = "";
+            txtbx_Message_Client_AnswerNeedet.Text = "";
+
+            txtbx_Message_Created_jsonString.Text = "";
+        }
+
+        private void Del_Exit_Textboxes_Click(object sender, RoutedEventArgs e)
+        {
+            txtbx_Message_Created_jsonString_input_fromPipe_Decode.Text = "";
+
+            txtbx_catch_Message_Category.Text = "";
+            txtbx_catch_Message_Server_ActionNeedet.Text = "";
+            txtbx_catch_Message_Server_IP.Text = "";
+            txtbx_catch_Message_Server_PipeName.Text = "";
+            txtbx_catch_Message_Value1.Text = "";
+            txtbx_catch_Message_Value2.Text = "";
+            txtbx_catch_Message_Value3.Text = "";
+            txtbx_catch_Message_Value4.Text = "";
+            txtbx_catch_Message_Value5.Text = "";
+            txtbx_catch_Message_Client_ActionNeedet.Text = "";
+            txtbx_catch_Message_Client_AnswerNeedet.Text = "";
         }
     }
 }

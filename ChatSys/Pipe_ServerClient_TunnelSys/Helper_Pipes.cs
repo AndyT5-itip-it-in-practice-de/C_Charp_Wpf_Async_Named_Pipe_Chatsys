@@ -45,6 +45,36 @@ namespace ChatSys.Helper_Klassen
         // Pipe-Maine-to-Client-InfoMsg
         // Pipe-Client-to-Maine-InfoMsg
 
+
+
+        /*
+                     Server
+                    ------------------------------------------------
+
+                    S1	=	Desktop_Links
+                    S2	=	Logging
+                    S3	=	Adjustment
+                    S4	=	Template_Managment
+                    S5	=	DM_AutoRestarter
+                    S6	=	DM_AutoBackuper
+                    S7	=	DM_AutoUpdater
+                    S8	=	WriteBack_AnswerServer
+
+
+                    Category
+                    ----------------------------------------------------
+                    LogWrite
+                    AdjustWrite_toIni
+                    AdjustWrite_toProgr
+                    Template_Managment
+                    ActionStarter
+                    DM_AutoRestarter
+                    DM_AutoBackuper
+                    DM_AutoUpdater
+                    DesktopManager
+                    InfoMsg
+         */
+
         public static async Task LogWrite(string LoggCategorie, string Message, string ActionServer, string ServerNo, string ActionClient, string AnswerClient)
         {
             await Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,

@@ -57,24 +57,29 @@ namespace ChatSys
 
         private async void Write_Log_Click(object sender, RoutedEventArgs e)
         {
-            //public static async void LogWrite(string LoggCategorie, string Message, bool ActionServer, String ServerNo, bool ActionClient, bool AnswerClient)
+            //public static async void LogWrite(string LoggCategorie, string Message, bool ActionServer, 
+            //                                    String ServerNo, bool ActionClient, bool AnswerClient)
 
+            string LogText = txtbx_Writelog_Text.Text;
+            if (string.IsNullOrEmpty(LogText)) { MessageBox.Show("txtbx_Writelog_Text - IsNullOrEmpty"); txtbx_Writelog_Text.Background = Brushes.Red; return; }
 
-           await  Helper_Pipes.LogWrite("SmallLogAllTogether", "Lalelu", "true", "S2", "true", "true");
+            await Helper_Pipes.LogWrite("SmallLogAllTogether", LogText, "true", "S2", "true", "true");
         }
 
         private async void Write_Adjustments_to_ini_Click(object sender, RoutedEventArgs e)
         {
             //public static async void AdjustWrite_toIni(String FileName, string Group, string Caller, string Value, bool ActionServer, String ServerNo, bool ActionClient, bool AnswerClient)
 
-            await Helper_Pipes.AdjustWrite_toIni("System", "Background_Color", "Name", "Red", "true", "S6", "true", "true");
+            await Helper_Pipes.AdjustWrite_toIni("System", "Background_Color", "Name", "Red", "true", "S3", "true", "true");
 
         }
 
         private async void Run_Program_Click(object sender, RoutedEventArgs e)
         {
+            string RunProgram = txtbx_RunProgram_Text.Text;
+            if (string.IsNullOrEmpty(RunProgram)) { MessageBox.Show("txtbx_RunProgram_Text - IsNullOrEmpty"); txtbx_RunProgram_Text.Background = Brushes.Red; return; }
 
-            await Helper_Pipes.ActionStarter("Button1", "Explorer", "Explorer", "true", "S1", "true", "true");
+            await Helper_Pipes.ActionStarter("Button1", "Explorer", RunProgram, "true", "S1", "true", "true");
         }
 
         private void Close(object sender, RoutedEventArgs e)
