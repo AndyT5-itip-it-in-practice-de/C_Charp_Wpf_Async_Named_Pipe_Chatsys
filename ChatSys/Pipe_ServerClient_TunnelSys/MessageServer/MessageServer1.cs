@@ -6,10 +6,11 @@
 //   Defines the MessageServer type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-using ChatSys.SecWindows;
+using ChatSys.Pipe_ServerClient_TunnelSys;
 using System;
 using System.IO;
 using System.IO.Pipes;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -132,18 +133,52 @@ namespace ChatSys
                                 messageRecieved(message);
 
 
-                                DispatcherOperation dispatcherOperation = Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
-                             new Action(async () =>
-                            {
-                                 foreach (Wpf_PipeConnectWindow window in Application.Current.Windows)
-                                {
-                                    if (window.GetType() == typeof(Wpf_PipeConnectWindow))
-                                    {
-                                        (window as Wpf_PipeConnectWindow).txtbx_Empfangen_Text.Text = (message);
-                                    }
-                                }
 
-                            }));
+                                /* -------------------------------------------------------------------------------------------------------------------
+                                * -------------------------------------------------------------------------------------------------------------------
+                                * -------------------------------------------------------------------------------------------------------------------
+                                * -------------------------------------------------------------------------------------------------------------------
+                                */
+#pragma warning disable CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
+                                Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background,
+                             new Action(() =>
+                             {
+                                 //NEW AUFRUF ANDERES fENSTER-----------------------------------------------------------
+                                 try
+                                 {
+                                     //---------------------------Greife Auf anderes Window zu-------------------------------------------------------------------------
+                                     var targetWindow = Application.Current.Windows.Cast<Window>().FirstOrDefault(window => window is Wpf_PipeConnectWindow) as Wpf_PipeConnectWindow;
+
+                                     targetWindow.txtbx_Empfangen_Text.Text = (message);
+                                 }
+                                 catch (Exception ex)
+                                 {
+                                     MessageBox.Show("MessageServer1:  StartListeningAsync = Error =\r\n" + ex.Message);
+                                     //await SmallLogError.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
+                                     //await SmallLogAllTogether.Logger("txtbx_Mousecatch_Canvas_Value_Top_Y_TextChanged = Error =\r\n" + ex.Message);
+
+                                 }
+                                 //NEW AUFRUF ANDERES fENSTER-----------------------------------------------------------
+
+                                 /*
+                                 foreach (Wpf_PipeConnectWindow window in Application.Current.Windows)
+                                 {
+                                     if (window.GetType() == typeof(Wpf_PipeConnectWindow))
+                                     {
+                                         (window as Wpf_PipeConnectWindow).txtbx_Empfangen_Text.Text = (message);
+                                     }
+                                 }
+                                 */
+
+                             }));
+
+#pragma warning restore CS4014 // Da auf diesen Aufruf nicht gewartet wird, wird die Ausführung der aktuellen Methode vor Abschluss des Aufrufs fortgesetzt.
+                                /* -------------------------------------------------------------------------------------------------------------------
+                                * -------------------------------------------------------------------------------------------------------------------
+                                * -------------------------------------------------------------------------------------------------------------------
+                                * -------------------------------------------------------------------------------------------------------------------
+                                */
+
                             }
                         }
                         if (pipe.IsConnected)

@@ -19,5 +19,7 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="10,191,0,0" VerticalAlignment="Top" Width="656" Panel.ZIndex="-2" Background="#19000000"/>
         <Label Content="Aufruf - Klassen Beispiel:" HorizontalAlignment="Left" Height="37" Margin="10,169,0,0" VerticalAlignment="Top" Width="150"/>
         <Label Content="(Autorun-in Background)" HorizontalAlignment="Left" Height="32" Margin="166,10,0,0" VerticalAlignment="Top" Width="364"/>
+        <Button Content="Close" Click="Close" HorizontalAlignment="Left" Width="96" Background="#FFF01717" Margin="951,197,0,21" FontWeight="Bold" FontSize="16" Height="40"/>
+        <Button Content="Restart" Click="Restart" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="99" Background="#FF8AF51E" Margin="847,197,0,0" FontWeight="Bold" FontSize="16"/>
     </Grid>
 </Window>

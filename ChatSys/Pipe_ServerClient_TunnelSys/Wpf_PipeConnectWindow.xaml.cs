@@ -23,7 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace ChatSys.SecWindows
+namespace ChatSys.Pipe_ServerClient_TunnelSys
 {
     /// <summary>
     /// Interaktionslogik für Wpf_PipeConnectWindow.xaml
@@ -69,7 +69,13 @@ namespace ChatSys.SecWindows
             cmbbx_Message_Category.Items.Add("LogWrite");
             cmbbx_Message_Category.Items.Add("AdjustWrite_toIni");
             cmbbx_Message_Category.Items.Add("AdjustWrite_toProgr");
+            cmbbx_Message_Category.Items.Add("Template_Managment");
             cmbbx_Message_Category.Items.Add("ActionStarter");
+            cmbbx_Message_Category.Items.Add("DM_AutoRestarter");
+            cmbbx_Message_Category.Items.Add("DM_AutoBackuper");
+            cmbbx_Message_Category.Items.Add("DM_AutoUpdater");
+            cmbbx_Message_Category.Items.Add("DesktopManager");
+            cmbbx_Message_Category.Items.Add("InfoMsg");
             ///-------------------------------------------------------------------------------------
 
             cmbbx_Message_Server_ActionNeedet.Items.Add("true");
@@ -616,28 +622,25 @@ namespace ChatSys.SecWindows
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
         }
 
-        private void Close(object sender, RoutedEventArgs e)
-        {
-
-            this.Close();
-            Application.Current.Shutdown();
-            // System.Windows.Application.Current.Shutdown();
-        }
-
-        private void Restart(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
-            this.Close();
-            Application.Current.Shutdown();
-            // System.Windows.Application.Current.Shutdown();
-        }
+       
 
         private void Listbox_Scroll_to_End_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Listbox_Outbox.SelectedIndex = Listbox_Outbox.Items.Count - 1;
-                Listbox_Outbox.ScrollIntoView(Listbox_Outbox.SelectedItem);
+               // Listbox_Outbox.SelectedIndex = Listbox_Outbox.Items.Count - 1;
+              //  Listbox_Outbox.ScrollIntoView(Listbox_Outbox.SelectedItem);
+
+                //-----------------------------------------------------------------------------------------
+
+                if (Listbox_Outbox != null)
+                {
+                    var border = (Border)VisualTreeHelper.GetChild(Listbox_Outbox, 0);
+                    var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+                    scrollViewer.ScrollToBottom();
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -659,6 +662,7 @@ namespace ChatSys.SecWindows
             txtbx_Server5_SendPipeName5.Text = txtListenPipeName.Text;
             txtbx_Server6_SendPipeName6.Text = txtListenPipeName.Text;
             txtbx_Server7_SendPipeName7.Text = txtListenPipeName.Text;
+            txtbx_Server8_SendPipeName8.Text = txtListenPipeName.Text;
         }
 
         private void Client_Restart_Click(object sender, RoutedEventArgs e)
@@ -772,25 +776,25 @@ namespace ChatSys.SecWindows
         {
             //Deserializes ---------------------------------------------
 
-            string jsonString = txtbx_Message_Created_jsonString.Text;
+            string jsonString = txtbx_Message_Created_jsonString_input_fromPipe_Decode.Text;   //txtbx_Message_Created_jsonString.Text;
 
             Message_Translator MessTransl = JsonConvert.DeserializeObject<Message_Translator>(jsonString);
+            { 
+                txtbx_catch_Message_Category.Text = (MessTransl.MessageCategory);
+                txtbx_catch_Message_Server_ActionNeedet.Text = (MessTransl.Server_ActionNeedet).ToString();
 
-            txtbx_catch_Message_Category.Text = (MessTransl.MessageCategory);
-            txtbx_catch_Message_Server_ActionNeedet.Text = (MessTransl.Server_ActionNeedet).ToString();
+                txtbx_catch_Message_Server_IP.Text = (MessTransl.Server_IP);
+                txtbx_catch_Message_Server_PipeName.Text = (MessTransl.Server_PipeName);
 
-            txtbx_catch_Message_Server_IP.Text = (MessTransl.Server_IP);
-            txtbx_catch_Message_Server_PipeName.Text = (MessTransl.Server_PipeName);
+                txtbx_catch_Message_Value1.Text = (MessTransl.value1);
+                txtbx_catch_Message_Value2.Text = (MessTransl.value2);
+                txtbx_catch_Message_Value3.Text = (MessTransl.value3);
+                txtbx_catch_Message_Value4.Text = (MessTransl.value4);
+                txtbx_catch_Message_Value5.Text = (MessTransl.value5);
 
-            txtbx_catch_Message_Value1.Text = (MessTransl.value1);
-            txtbx_catch_Message_Value2.Text = (MessTransl.value2);
-            txtbx_catch_Message_Value3.Text = (MessTransl.value3);
-            txtbx_catch_Message_Value4.Text = (MessTransl.value4);
-            txtbx_catch_Message_Value5.Text = (MessTransl.value5);
-
-            txtbx_catch_Message_Client_ActionNeedet.Text = (MessTransl.Client_ActionNeedet).ToString();
-            txtbx_catch_Message_Client_AnswerNeedet.Text = (MessTransl.Client_AnswerNeedet).ToString();
-
+                txtbx_catch_Message_Client_ActionNeedet.Text = (MessTransl.Client_ActionNeedet).ToString();
+                txtbx_catch_Message_Client_AnswerNeedet.Text = (MessTransl.Client_AnswerNeedet).ToString();
+            }
         }
 
         private void Send_jsonString_to_Server1_Click(object sender, RoutedEventArgs e)
@@ -869,7 +873,7 @@ namespace ChatSys.SecWindows
             }
         }
 
-        private void txtbx_Message_Server_Number_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtbx_Message_Client_AnswerNeedet_TextChanged(object sender, TextChangedEventArgs e)
         {
             string ServerActionNeedet = txtbx_Message_Server_ActionNeedet.Text;
             string ServerNo = txtbx_Message_Server_Number.Text;
@@ -883,16 +887,53 @@ namespace ChatSys.SecWindows
                 {
                     txtbx_Message_Server_PipeName.Text = txtbx_Server1_SendPipeName1.Text;
 
-                    //Serialisize
-                    Create_lsonString_Click(sender, new RoutedEventArgs());
+                    //----------------------------------------------------------
+                    //loop check 3times...
+                    int i;
+                    int j = 5;
+                    for (i = 0, Console.WriteLine($"Start: i={i}, j={j}"); i < j; i++, j--, Console.WriteLine($"Step: i={i}, j={j}"))
+                    {
+                       string x1 = txtbx_Message_Value1.Text;
+                        string x2 = txtbx_Message_Value2.Text;
+                          string x3 = txtbx_Message_Value3.Text;
 
-                  //  txtbx_Server1_Send_Text1.Text = "";
-                  //  txtbx_Server1_Send_Text1.Text = txtbx_Message_Created_jsonString.Text;
-                  //  string value = txtbx_Server1_Send_Text1.Text;
-                  //  if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s1 - value \r\n" + "Sendbox empty"); return; }
+                        // wenn es nicht leer ist...
+                        if (!string.IsNullOrEmpty(x1)) 
+                        {
+                            MessageBox.Show("da1");
+                            // wenn es nicht leer ist...
+                            if (!string.IsNullOrEmpty(x2))
+                            {
+                                MessageBox.Show("da2");
+                                // wenn es nicht leer ist...
+                                if (!string.IsNullOrEmpty(x3))
+                                {
+                                    MessageBox.Show("da3");
+                                    //Serialisize
+                                    Create_lsonString_Click(sender, new RoutedEventArgs());
+                                    goto NextStep;
+                                }
+
+                            }
+                        }
+
+                        Listbox_Outbox.Items.Add("*** txtbx_Message_Server_Number_TextChanged check all there : ***  " + i + " from " + j + "  **");
+                        Listbox_Scroll_to_End_Click(sender, new RoutedEventArgs());
+
+
+                    }
+
+                    //----------------------------------------------------------
+                    NextStep:
+                   
+
+                   txtbx_Server1_Send_Text1.Text = "";
+                   txtbx_Server1_Send_Text1.Text = txtbx_Message_Created_jsonString.Text;
+                   string value = txtbx_Server1_Send_Text1.Text;
+                   if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s1 - value \r\n" + "Sendbox empty"); return; }
 
                     //Send
-                  //  butSenden_Server1_Click(sender, new RoutedEventArgs());
+                   butSenden_Server1_Click(sender, new RoutedEventArgs());
                 }
                 //----------------------------------------------------------------------------------------------------
                 if (ServerNo == "S2")//(Logging)
@@ -902,13 +943,13 @@ namespace ChatSys.SecWindows
                     //Serialisize
                     Create_lsonString_Click(sender, new RoutedEventArgs());
 
-                  //  txtbx_Server2_Send_Text2.Text = "";
-                  //  txtbx_Server2_Send_Text2.Text = txtbx_Message_Created_jsonString.Text;
-                  //  string value = txtbx_Server2_Send_Text2.Text;
-                 //   if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s2 - value \r\n" + "Sendbox empty"); return; }
+                    txtbx_Server2_Send_Text2.Text = "";
+                   txtbx_Server2_Send_Text2.Text = txtbx_Message_Created_jsonString.Text;
+                   string value = txtbx_Server2_Send_Text2.Text;
+                   if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s2 - value \r\n" + "Sendbox empty"); return; }
 
                     //Send
-                 //  butSenden_Server2_Click(sender, new RoutedEventArgs());
+                   butSenden_Server2_Click(sender, new RoutedEventArgs());
 
                 }
                 //----------------------------------------------------------------------------------------------------
@@ -934,13 +975,13 @@ namespace ChatSys.SecWindows
                     //Serialisize
                     Create_lsonString_Click(sender, new RoutedEventArgs());
 
-                //    txtbx_Server6_Send_Text6.Text = "";
-                 //   txtbx_Server6_Send_Text6.Text = txtbx_Message_Created_jsonString.Text;
-                 //   string value = txtbx_Server6_Send_Text6.Text;
-                 //   if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s6 - value \r\n" + "Sendbox empty"); return; }
+                    txtbx_Server6_Send_Text6.Text = "";
+                    txtbx_Server6_Send_Text6.Text = txtbx_Message_Created_jsonString.Text;
+                    string value = txtbx_Server6_Send_Text6.Text;
+                    if (string.IsNullOrEmpty(value)) { MessageBox.Show("Abbruch *txtbx_Message_Server_Number_TextChanged s6 - value \r\n" + "Sendbox empty"); return; }
 
                     //Send
-                //    butSenden_Server6_Click(sender, new RoutedEventArgs());
+                    butSenden_Server6_Click(sender, new RoutedEventArgs());
 
                 }
                 //----------------------------------------------------------------------------------------------------
@@ -948,6 +989,28 @@ namespace ChatSys.SecWindows
                 {
                     txtbx_Message_Server_PipeName.Text = txtbx_Server7_SendPipeName7.Text;
                 }
+            }
+
+
+        }
+
+        private void butSenden_Server8_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void txtbx_Empfangen_Text_textChanged(object sender, TextChangedEventArgs e)
+        {
+            string messageReceievd = txtbx_Empfangen_Text.Text;
+
+            //wenn message enthällt.... - anzeichen das es ein json string ist...
+            string SearchItem1 = "MessageCategory";
+            if (messageReceievd.Contains(SearchItem1) == true)
+            {
+                txtbx_Message_Created_jsonString_input_fromPipe_Decode.Text = txtbx_Empfangen_Text.Text;
+
+                //decode
+                Read_lsonString_Click(sender, new RoutedEventArgs());
             }
 
 

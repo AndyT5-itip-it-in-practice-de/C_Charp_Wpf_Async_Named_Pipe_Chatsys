@@ -1,4 +1,4 @@
-﻿using ChatSys.SecWindows;
+﻿using ChatSys.Pipe_ServerClient_TunnelSys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,12 +75,13 @@ namespace ChatSys.Helper_Klassen
                                     // Server IP
                                     // Server PipeName
                                     targetWindow.PipeConWind.txtbx_Message_Server_Number.Text = ServerNo;
-                                    // Server IP
+                                    // 
                                     targetWindow.PipeConWind.txtbx_Message_Value1.Text = LoggCategorie;
                                     targetWindow.PipeConWind.txtbx_Message_Value2.Text = Message;
-                                    // Value3
-                                    // Value4
-                                    // Value5
+                                    targetWindow.PipeConWind.txtbx_Message_Value3.Text = "-";
+                                    targetWindow.PipeConWind.txtbx_Message_Value4.Text = "-";
+                                    targetWindow.PipeConWind.txtbx_Message_Value5.Text = "-";
+                                    //
                                     targetWindow.PipeConWind.txtbx_Message_Client_ActionNeedet.Text = ActionClient;
                                     targetWindow.PipeConWind.txtbx_Message_Client_AnswerNeedet.Text = AnswerClient;
                                 }
@@ -133,7 +134,8 @@ namespace ChatSys.Helper_Klassen
                                     targetWindow.PipeConWind.txtbx_Message_Value2.Text = Caller;
                                     targetWindow.PipeConWind.txtbx_Message_Value3.Text = Group;
                                     targetWindow.PipeConWind.txtbx_Message_Value4.Text = Value;
-                                    // Value5
+                                    targetWindow.PipeConWind.txtbx_Message_Value5.Text = "-";
+                                    //
                                     targetWindow.PipeConWind.txtbx_Message_Client_ActionNeedet.Text = ActionClient;
                                     targetWindow.PipeConWind.txtbx_Message_Client_AnswerNeedet.Text = AnswerClient;
 
@@ -182,8 +184,9 @@ namespace ChatSys.Helper_Klassen
                                     targetWindow.PipeConWind.txtbx_Message_Value1.Text = RealButtonName;
                                     targetWindow.PipeConWind.txtbx_Message_Value2.Text = Name;
                                     targetWindow.PipeConWind.txtbx_Message_Value3.Text = Action;
-                                    // Value4
-                                    // Value5
+                                    targetWindow.PipeConWind.txtbx_Message_Value4.Text = "-";
+                                    targetWindow.PipeConWind.txtbx_Message_Value5.Text = "-";
+                                    //
                                     targetWindow.PipeConWind.txtbx_Message_Client_ActionNeedet.Text = ActionClient;
                                     targetWindow.PipeConWind.txtbx_Message_Client_AnswerNeedet.Text = AnswerClient;
                             }
