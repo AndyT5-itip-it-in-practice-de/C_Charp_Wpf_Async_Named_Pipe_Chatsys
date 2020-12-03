@@ -1,0 +1,229 @@
+﻿<Window x:Class="ChatSys.SecWindows.Wpf_PipeConnectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChatSys.SecWindows"
+        mc:Ignorable="d"
+        Title="Wpf_PipeConnectWindow" Height="586" Width="1304.194" WindowStartupLocation="CenterOwner">
+    <Grid Margin="0,0,2,0">
+        <Canvas HorizontalAlignment="Left" Height="529" Margin="36,16,0,0" VerticalAlignment="Top" Width="1255" Background="#FFF3F3F3">
+            <Label Content="C# Wpf Named Pipes with Async" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="308" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold" Canvas.Left="401" Canvas.Top="32"/>
+            <Button Content="New..." Click="New_Window" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="46" Background="#FFF5E57E" Canvas.Left="809" Canvas.Top="10"/>
+            <Button Content="Close" Click="Close" HorizontalAlignment="Left" Width="46" Background="#FFF01717" Height="22" Canvas.Left="1052" Canvas.Top="503"/>
+            <Button Content="Restart" Click="Restart" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="46" Background="#FF8AF51E" Canvas.Left="995" Canvas.Top="503"/>
+            <ListBox x:Name="Listbox_Outbox" HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="421" Background="#FF111111" Foreground="White" Panel.ZIndex="2" FontSize="8" Canvas.Left="579" Canvas.Top="257"/>
+            <Label Content="Log..." HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="579" Canvas.Top="234"/>
+            <Button Content="Clear Log" Click="Clear_Listbox" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="74" Background="#FFF10707" Canvas.Left="809" Canvas.Top="437"/>
+            <Button Content="List_Scroll_to_End" Click="Listbox_Scroll_to_End_Click" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="95" Background="{x:Null}" Canvas.Left="898" Canvas.Top="437"/>
+
+            <Canvas Height="159" Canvas.Left="10" Canvas.Top="79" Width="162" Background="White">
+                <TextBox x:Name="txtbx_Server1_SendPipeName1" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden1" Content="Sende" Click="butSenden_Server1_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="129" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName1" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server1_Send_Text1" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 1" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 1" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Left="-3"/>
+                <Label Content="(Desktop Links)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="83" Canvas.Left="79" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+
+            <Canvas Height="159" Canvas.Left="180" Canvas.Top="79" Width="162" Background="White">
+                <TextBox x:Name="txtbx_Server2_SendPipeName2" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden2" Content="Sende" Click="butSenden_Server2_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="129" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName2" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server2_Send_Text2" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 2" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 2" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" Canvas.Left="-4" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
+                <Label Content="(Logging)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="83" Canvas.Left="79" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+
+            <Canvas Height="159" Canvas.Left="351" Canvas.Top="79" Width="162" Background="White">
+                <TextBox x:Name="txtbx_Server3_SendPipeName3" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden3" Content="Sende" Click="butSenden_Server3_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="129" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName 3" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server3_Send_Text3" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 3" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 3" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Left="-4"/>
+                <Label Content="(DM_PrAutorestarter)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="100" Canvas.Left="63" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+
+            <Canvas Height="159" Canvas.Left="522" Canvas.Top="79" Width="162" Background="White">
+                <TextBox x:Name="txtbx_Server4_SendPipeName4" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden4" Content="Sende" Click="butSenden_Server4_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="128" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName 4" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server4_Send_Text4" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 4" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 4" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Left="-4"/>
+                <Label Content="(DM_PrAutobackuper)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="105" Canvas.Left="59" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+
+            <Canvas Height="159" Canvas.Left="693" Canvas.Top="79" Width="162" Background="White">
+                <TextBox x:Name="txtbx_Server5_SendPipeName5" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden5" Content="Sende" Click="butSenden_Server5_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="129" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName 5" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server5_Send_Text5" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 5" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 5" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Left="-4"/>
+                <Label Content="(DM_PrAutoUpdater)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="98" Canvas.Left="65" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+
+
+            <Canvas Height="164" Canvas.Left="10" Canvas.Top="278" Width="165" Background="White">
+                <Button x:Name="butListen" Content="Lese" Click="butListen_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="16" Canvas.Top="129" Background="#FFC7E63C"/>
+                <TextBox x:Name="txtListenPipeName" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="23" Canvas.Top="47" FontSize="10" />
+                <Label Content="txtListenPipeName" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Canvas.Left="23" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Empfangen_Text" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" Canvas.Left="16" Canvas.Top="93"/>
+                <Label Content="Empfangen Text" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="23" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="10" Canvas.Top="26" Width="150" Panel.ZIndex="-2"/>
+                <Label Content="Client" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" Canvas.Left="10" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold"/>
+                <Button x:Name="butListen_Copy" Click="Client_Restart_Click" Content="Restart" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="52" Canvas.Left="97" Canvas.Top="129"/>
+                <Button Content="Load" Height="17" Canvas.Left="132" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="132" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+
+            <Label Content="Sender" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="87" Canvas.Left="10" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Canvas.Top="38"/>
+            <Label Content="Empfänger" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="96" Canvas.Left="10" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Canvas.Top="238"/>
+            <Label Content="Autostart = " HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" Canvas.Left="116" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Top="241"/>
+            <TextBox x:Name="txtbx_Client_Autostart_YesNo" Height="14" Canvas.Left="211" TextWrapping="Wrap" Text="..." Canvas.Top="250" Width="63" FontSize="10"/>
+            <Button Content="Client Pipename to all Server" Click="Client_Neme_toall_Server_Click" Height="24" Canvas.Left="10" Canvas.Top="453" Width="165" Background="#FFE8C905"/>
+            <TextBox x:Name="txtbx_AppDirectory" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="862" Canvas.Left="75" Canvas.Top="503" FontSize="10"/>
+            <Label Content="Directory:" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="67" Canvas.Left="8" Canvas.Top="500"/>
+            <Label x:Name="lbl_DateTime" Content="DateTime" Height="34" Canvas.Left="709" Canvas.Top="10" Width="100"/>
+            <Label Content="Server_LOCAL_SERVER" Height="29" Canvas.Left="90" Width="105" FontSize="10" Canvas.Top="15"/>
+            <Label Content="Server_DEFAULT_TIME_OUT" Height="29" Canvas.Left="90" Canvas.Top="55" Width="131" FontSize="10"/>
+            <Label Content="Server_Send_Sleep_Time" Height="29" Canvas.Left="100" Canvas.Top="34" Width="118" FontSize="10" RenderTransformOrigin="0.562,1.149"/>
+            <TextBox x:Name="txtbx_Server_LOCAL_SERVER" Height="14" Canvas.Left="203" TextWrapping="Wrap" Text="." Canvas.Top="21" Width="85" FontSize="9"/>
+            <TextBox x:Name="txtbx_Server_Send_Sleep_Time" Height="14" Canvas.Left="226" TextWrapping="Wrap" Text="500" Canvas.Top="40" Width="62" FontSize="10"/>
+            <TextBox x:Name="txtbx_Server_DEFAULT_TIME_OUT" Height="14" Canvas.Left="226" TextWrapping="Wrap" Text="500" Canvas.Top="59" Width="62" FontSize="10"/>
+            <Button Content="Load" Height="17" Canvas.Left="293" Canvas.Top="20" Width="25" FontSize="10"/>
+            <Button Content="Save" Height="17" Canvas.Left="323" Canvas.Top="20" Width="25" FontSize="10"/>
+            <Button Content="Load" Height="17" Canvas.Left="293" Canvas.Top="40" Width="25" FontSize="10"/>
+            <Button Content="Save" Height="17" Canvas.Left="323" Canvas.Top="40" Width="25" FontSize="10"/>
+            <Button Content="Load" Height="17" Canvas.Left="293" Canvas.Top="59" Width="25" FontSize="10"/>
+            <Button Content="Save" Height="17" Canvas.Left="323" Canvas.Top="59" Width="25" FontSize="10"/>
+            <Label Content="Client_WatchReturn_Sleep_Time" Height="29" Canvas.Left="296" Width="147" FontSize="10" Canvas.Top="246"/>
+            <TextBox x:Name="txtbx_Client_WatchReturn_Sleep_Time" Height="14" Canvas.Left="451" TextWrapping="Wrap" Text="500" Canvas.Top="252" Width="62" FontSize="10"/>
+            <Button Content="Load" Height="17" Canvas.Left="518" Canvas.Top="251" Width="25" FontSize="10"/>
+            <Button Content="Save" Height="17" Canvas.Left="548" Canvas.Top="251" Width="25" FontSize="10"/>
+            <TextBox x:Name="txtbx_Local_IP" HorizontalAlignment="Left" Height="14" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Canvas.Left="203" Canvas.Top="4" FontSize="9" Text="xxx.xxx.xxx.xxx" />
+            <Label Content="Local IP:" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="52" Canvas.Left="151" FontSize="10" Canvas.Top="-2"/>
+            <Button Content="Set as  Server" Click="Set_thisNetAdress_as_Server"     Height="17" Canvas.Left="293" Canvas.Top="2" Width="79" FontSize="10" Background="#FFADFF36"/>
+            <Button Content="Yes" Height="17" Canvas.Left="278" Canvas.Top="248" Width="25" FontSize="10"/>
+            <Button Content="No" Height="17" Canvas.Left="308" Canvas.Top="248" Width="25" FontSize="10"/>
+            <Button Content="open" Click="Open_Directory" Height="22" Canvas.Left="942" Canvas.Top="503" Width="44" Background="#FFE8C905"/>
+            <Label Content="(Client ip adress tosent to from Server)" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top" Width="196" Canvas.Left="377" FontSize="10" Canvas.Top="-2"/>
+            <Button Content="default" Click="Set_default_IP_Server_LOCAL_SERVER"     Height="17" Canvas.Left="351" Canvas.Top="20" Width="46" FontSize="10" Background="#FFADFF36"/>
+            <Canvas Height="232" Canvas.Left="1032" Canvas.Top="9" Width="222" Background="#FFFBFAFA">
+                <Label Content="Message Serialize" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="161" Canvas.Left="10" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Canvas.Top="-6"/>
+                <TextBox x:Name="txtbx_Message_Category" Height="14" Canvas.Left="94" TextWrapping="Wrap" Canvas.Top="23" Width="71" FontSize="10"/>
+                <Label Content="1. MessageCategory" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="18"/>
+                <ComboBox x:Name="cmbbx_Message_Category" SelectionChanged="cmbbx_Message_Category_SelectionChanged" Height="14" Canvas.Left="170" Canvas.Top="23" Width="44"/>
+                <TextBox x:Name="txtbx_Message_Server_ActionNeedet" Height="14" Canvas.Left="103" TextWrapping="Wrap" Canvas.Top="40" Width="62" FontSize="10"/>
+                <Label Content="2. ServerActionNeedet" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="35"/>
+                <ComboBox x:Name="cmbbx_Message_Server_ActionNeedet" SelectionChanged="cmbbx_Message_Server_ActionNeedet_SelectionChanged" Height="14" Canvas.Left="170" Canvas.Top="40" Width="44"/>
+                <Label Content="3. Server IP" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="56" FontSize="9" Canvas.Top="55" Canvas.Left="1"/>
+                <TextBox x:Name="txtbx_Message_Value1" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="93" Width="109" FontSize="10"/>
+                <Label Content="4. Value2" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="104" Canvas.Left="2"/>
+                <TextBox x:Name="txtbx_Message_Value2" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="109" Width="109" FontSize="10"/>
+                <Label Content="4. Value3" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="120" Canvas.Left="1"/>
+                <TextBox x:Name="txtbx_Message_Value3" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="126" Width="109" FontSize="10"/>
+                <Label Content="4. Value4" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="137" Canvas.Left="1"/>
+                <TextBox x:Name="txtbx_Message_Value4" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="143" Width="109" FontSize="10"/>
+                <Label Content="4. Value5" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="154" Canvas.Left="1"/>
+                <TextBox x:Name="txtbx_Message_Value5" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="160" Width="109" FontSize="10"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Canvas.Top="18" Width="188" Canvas.Left="-7"/>
+                <TextBox x:Name="txtbx_Message_Client_ActionNeedet" Height="14" Canvas.Left="103" TextWrapping="Wrap" Canvas.Top="179" Width="62" FontSize="10"/>
+                <Label Content="5. ClientActionNeedet" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="174"/>
+                <ComboBox x:Name="cmbbx_Message_Client_ActionNeedet" SelectionChanged="cmbbx_Message_Client_ActionNeedet_SelectionChanged"   Height="14" Canvas.Left="170" Canvas.Top="179" Width="44"/>
+                <Button x:Name="But_Create_jsonString" Content="Create jsonString" Click="Create_lsonString_Click" Height="18" Canvas.Top="212" Width="98" Canvas.Left="2" FontSize="10" FontWeight="Bold"/>
+                <TextBox x:Name="txtbx_Message_Server_IP" Height="14" Canvas.Left="91" TextWrapping="Wrap" Canvas.Top="59" Width="102" FontSize="10" Background="#FFF0F0F0"/>
+                <TextBox x:Name="txtbx_Message_Server_PipeName" Height="14" Canvas.Left="91" TextWrapping="Wrap" Canvas.Top="74" Width="102" FontSize="10" Background="#FFF0F0F0"/>
+                <Label Content="4. Value1" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="88" Canvas.Left="2"/>
+                <TextBox x:Name="txtbx_Message_Client_AnswerNeedet" Height="14" Canvas.Left="103" TextWrapping="Wrap" Canvas.Top="195" Width="62" FontSize="10"/>
+                <Label Content="5. ClientAnswerNeedet" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="190"/>
+                <ComboBox x:Name="cmbbx_Message_Client_AnswerNeedet" SelectionChanged="cmbbx_Message_Client_AnswerNeedet_SelectionChanged"   Height="14" Canvas.Left="170" Canvas.Top="195" Width="44"/>
+                <Label Content="3. Server PipeName" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="90" FontSize="9" Canvas.Top="69" Canvas.Left="1"/>
+                <TextBox x:Name="txtbx_Message_Server_Number" TextChanged="txtbx_Message_Server_Number_TextChanged" Height="14" Canvas.Left="195" TextWrapping="Wrap" Canvas.Top="74" Width="19" FontSize="10" Background="#FFF3EFEF"/>
+            </Canvas>
+            <Canvas Height="222" Canvas.Left="1028" Canvas.Top="274" Width="222" Background="#FFFBFAFA">
+                <Label Content="Message Deserialize" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="173" Canvas.Left="2" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Canvas.Top="-8"/>
+                <Button Content="Read jsonString" Click="Read_lsonString_Click" Height="17" Canvas.Top="21" Width="98" Canvas.Left="2" FontSize="10" FontWeight="Bold"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="2" Canvas.Top="18" Width="188" Canvas.Left="-7"/>
+                <TextBox x:Name="txtbx_catch_Message_Category" Height="14" Canvas.Left="105" TextWrapping="Wrap" Canvas.Top="39" Width="62" FontSize="10"/>
+                <Label Content="1. MessageCategory" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="33" Canvas.Left="1" RenderTransformOrigin="0.5,0.5">
+                    <Label.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="6.557"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="1.552"/>
+                        </TransformGroup>
+                    </Label.RenderTransform>
+                </Label>
+                <TextBox x:Name="txtbx_catch_Message_Server_ActionNeedet" Height="14" Canvas.Left="105" TextWrapping="Wrap" Canvas.Top="54" Width="62" FontSize="10"/>
+                <Label Content="2. ServerActionNeedet" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="49" Canvas.Left="2"/>
+                <Label Content="4. Value1" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="101"/>
+                <TextBox x:Name="txtbx_catch_Message_Value1" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="107" Width="109" FontSize="10"/>
+                <Label Content="4. Value2" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="118"/>
+                <TextBox x:Name="txtbx_catch_Message_Value2" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="124" Width="109" FontSize="10"/>
+                <Label Content="4. Value3" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="133"/>
+                <TextBox x:Name="txtbx_catch_Message_Value3" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="139" Width="109" FontSize="10"/>
+                <Label Content="4. Value4" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="51" FontSize="9" Canvas.Top="149"/>
+                <TextBox x:Name="txtbx_catch_Message_Value4" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="155" Width="109" FontSize="10"/>
+                <Label Content="4. Value5" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="51" FontSize="10" Canvas.Top="165"/>
+                <TextBox x:Name="txtbx_catch_Message_Value5" Height="14" Canvas.Left="56" TextWrapping="Wrap" Canvas.Top="171" Width="109" FontSize="10"/>
+                <TextBox x:Name="txtbx_catch_Message_Client_ActionNeedet" Height="14" Canvas.Left="103" TextWrapping="Wrap" Canvas.Top="189" Width="62" FontSize="10"/>
+                <Label Content="5. Client ActionNeedet" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="185" Canvas.Left="-1"/>
+                <TextBox x:Name="txtbx_catch_Message_Server_PipeName" Height="14" Canvas.Left="104" TextWrapping="Wrap" Canvas.Top="87" Width="62" FontSize="10"/>
+                <Label Content="3. Server PipeName" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="82" Canvas.Left="1"/>
+                <TextBox x:Name="txtbx_catch_Message_Client_AnswerNeedet" Height="14" Canvas.Left="103" TextWrapping="Wrap" Canvas.Top="204" Width="62" FontSize="10"/>
+                <Label Content="5. Client AnswerNeedet" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="199" Canvas.Left="-1"/>
+                <TextBox x:Name="txtbx_catch_Message_Server_IP" Height="14" Canvas.Left="104" TextWrapping="Wrap" Canvas.Top="71" Width="62" FontSize="10"/>
+                <Label Content="3. Server  IP" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="104" FontSize="9" Canvas.Top="66" Canvas.Left="1"/>
+            </Canvas>
+            <TextBox x:Name="txtbx_Message_Created_jsonString" Height="22" Canvas.Left="1114" TextWrapping="Wrap" Canvas.Top="246" Width="136" FontSize="7" RenderTransformOrigin="0.5,0.5" Foreground="#FFF50000" Text="...&#xA;....&#xA;....." Background="#FFE8E2E2"/>
+            <Button x:Name="But_Send_jsonString_to_Server1" Content="&lt;-Send to Server1" Click="Send_jsonString_to_Server1_Click" Height="22" Canvas.Left="1020" Canvas.Top="246" Width="90" FontSize="10" FontWeight="Bold" FontStyle="Italic"/>
+            <Button Content="Hide" Click="Hide_Click" Height="19" Canvas.Left="1108" Canvas.Top="505" Width="142" Background="#FFFFD393"/>
+            <Canvas Height="159" Canvas.Left="865" Canvas.Top="79" Width="162" Background="White">
+                <TextBox x:Name="txtbx_Server6_SendPipeName6" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden6" Content="Sende" Click="butSenden_Server6_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="129" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName 6" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server6_Send_Text6" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 6" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 6" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Left="-4"/>
+                <Label Content="(Ini_Read_Writer)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="98" Canvas.Left="65" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+            <Canvas Height="164" Canvas.Left="203" Canvas.Top="278" Width="194" Background="White">
+                <TextBox x:Name="txtbx_Server7_SendPipeName7" HorizontalAlignment="Left" Height="32" TextWrapping="Wrap" VerticalAlignment="Top" Width="107" Text="Pong" Panel.ZIndex="2" Background="#FFE6E6E6" Canvas.Left="21" Canvas.Top="47" FontSize="10"/>
+                <Button x:Name="butSenden7" Content="Sende" Click="butSenden_Server6_Click" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="76" Canvas.Left="21" Canvas.Top="129" Background="#FFC7E63C"/>
+                <Label Content="SendPipeName 7" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="26"/>
+                <TextBox x:Name="txtbx_Server7_Send_Text7" HorizontalAlignment="Left" Height="31" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="131" Canvas.Left="21" Canvas.Top="93"/>
+                <Label Content="Send Text 7" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="117" Canvas.Left="21" Canvas.Top="72"/>
+                <Border BorderBrush="Black" BorderThickness="1" Height="128" Canvas.Left="9" Canvas.Top="26" Width="149" Panel.ZIndex="-2"/>
+                <Label Content="Server 7" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="87" FontFamily="Comic Sans MS" FontSize="14" FontWeight="Bold" Canvas.Left="-4"/>
+                <Label Content="(WriteBack-AnswerServer)" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="126" Canvas.Left="65" Canvas.Top="4" FontSize="10"/>
+                <Button Content="Load" Height="17" Canvas.Left="130" Canvas.Top="45" Width="25" FontSize="10"/>
+                <Button Content="Save" Height="17" Canvas.Left="130" Canvas.Top="63" Width="25" FontSize="10"/>
+            </Canvas>
+        </Canvas>
+
+    </Grid>
+</Window>
