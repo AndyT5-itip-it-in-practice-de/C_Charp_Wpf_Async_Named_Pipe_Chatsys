@@ -15,6 +15,8 @@
             //
             // this.SettingsSaving += this.SettingsSavingEventHandler;
             //
+			 // new stuff
+            //
         }
         
         private void SettingChangingEventHandler(object sender, System.Configuration.SettingChangingEventArgs e) {
